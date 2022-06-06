@@ -11,41 +11,41 @@ def create_tables(db):
   
   cur.execute('''CREATE TABLE IF NOT EXISTS habits (
     habit_name TEXT PRIMARY KEY,
-    periodicity TEXT
+    periodicity TEXT,
     streak INT,
-    creation_date TEXT
-  )''')
+    creation_date TEXT)''')
 
   cur.execute('''CREATE TABLE IF NOT EXISTS habits_data (
     habit_name TEXT,
     time_at_completion TEXT,
     current_streak INT,
     checkedOff BOOL,
-    FOREIGN KEY (habit_name) REFERENCES habits(habit_name)
-  )''')
+    FOREIGN KEY (habit_name) REFERENCES habits(habit_name))''')
 
   db.commit()
 
 def new_Habit(db, name, periodicity,streak=0):
   cur = db.cursor()
   creation_date = date.today()
-  cur.execute("INSERT INTO habits VALUES (?,?,?,?)", (name,periodicity,streak, creation_date))
+  # cur.execute("INSERT or REPLACE INTO habits VALUES (?,?,?)", (name,periodicity,streak))
+  cur.execute("INSERT or REPLACE INTO habits VALUES (?,?,?,?)", (name,periodicity,streak, creation_date))
   
   db.commit()
 
 def habit_checkingOff(db,habit_name,streak=0,checked= False):
   cur = db.cursor()
   checking_date = date.today()
-  cur.execute("INSERT INTO habits_data VALUES (?,?,?)", (habit_name,checking_date,streak, checked))
+  cur.execute("INSERT or REPLACE INTO habits_data VALUES (?,?,?,?)", (habit_name,checking_date,streak, checked))
+  # cur.execute("INSERT INTO habits_data VALUES (?,?,?)", (habit_name,checking_date,streak, checked))
   db.commit()
 
 #getting data from DB
 def get_HabitData(db, habit_name):
   cur = db.cursor()
-  cur.execute("SELECT * FROM habits_data WHERE habit_name=?", (habit_name))
+  cur.execute("SELECT * FROM habits_data WHERE habit_name=?", (habit_name,))
   return cur.fetchall()
 
 def get_Habits(db, habit_name):
   cur = db.cursor()
-  cur.execute("SELECT * FROM habits_data WHERE habit_name=?", (habit_name))
+  cur.execute("SELECT * FROM habits WHERE habit_name=?", (habit_name,))
   return cur.fetchall()

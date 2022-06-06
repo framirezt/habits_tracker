@@ -8,8 +8,8 @@ def habits_list(db, habit_name):
   :param habit_name:
   :return:
   """
-  data = get_Habits(db, habit_name)
-  return data
+  data = get_HabitData(db, habit_name)
+  return len(data)
 
 
 # return a list of all habits with the same periodicity,

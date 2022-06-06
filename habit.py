@@ -22,5 +22,4 @@ class Habit:
 
 
 
-# habit = Habit('running', 'daily')
-# print(habit)
+habit = Habit('running', 'daily')
