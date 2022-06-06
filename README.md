@@ -6,7 +6,11 @@ description
 
 ```shell
 pip install -r requirements.txt
+```
+
 or
+
+```shell
 pip3 install -r requirements.txt
 ```
 
@@ -16,7 +20,11 @@ start
 
 ```shell
 python main.py
+```
+
 or
+
+```shell
 python3 main.py
 ```
 
@@ -26,6 +34,10 @@ and follow instructions on screen
 
 ```shell
 pytest .
+```
+
 or
+
+```shell
 python3 -m pytest
 ```
