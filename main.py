@@ -6,29 +6,32 @@ import questionary
 
 def cli():
   db = get_db()
-  questionary.confirm("are you ready?").ask()
 
   stop = False
   while not stop:
-    choice = questionary.select("What do you want to do?",choices=["1. Create a new Habit", "2. Check off your Habit", "3. Get My Analytics", "4. Exit"]).ask()
+    choice = questionary.select("What do you want to do?",choices=["1. Create a new Habit", "2. Check off your Habit", "3. Delete a habit", "4. Get My Analytics", "5. Exit"]).ask()
 
     if choice == "1. Create a new Habit":
       habit_name = questionary.text("What's the name of the habit you want to create?").ask()
       periodicity = questionary.select("How often do you want to do this task?",choices=["Daily", "Weekly", "Monthly"]).ask()
       habit = Habit(habit_name, periodicity)
       habit.store_newHabit(db)
+      # habit.start_periodicity()
 
     elif choice == "2. Check off your Habit":
       habit_name = questionary.text("What's the name of the habit you want to check-off?").ask()
       habit = Habit(habit_name, "NULL")
-      habit.incremenet()
       habit.checkingOff(db)
+    
+    elif choice == "3. Delete a habit":
+      habit_name = questionary.text("What's the name of the habit you want to delete?").ask()
+      delete_habit(db, habit_name)
       
-    elif choice == "3. Get My Analytics":
-      #ask if wants analytics for all or just one habit
-      habit_name = questionary.text("What's the name of the habit?").ask()
-      habits_count = habits_list(db, habit_name)
-      print(f"You currently have {habits_count} habits.")
+    elif choice == "4. Get My Analytics":
+      analytics_choice = questionary.select("Which analytics do you want to see?",choices=["1. All your current habits with their details.", "2. All habits with a same periodicity", "3. The longest streak you have had out of all your habits.", "4. The longest streak for a specific habit."]).ask()
+      if analytics_choice == "1. All your current habits with their details.":
+        habits_list(db)
+      
 
     else:
       print("You have exited successfully.")
@@ -37,3 +40,5 @@ def cli():
 
 if __name__ == '__main__':
   cli()
+
+# python3 main.py

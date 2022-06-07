@@ -6,6 +6,7 @@ def get_db(name="main.db"):
   create_tables(db)
   return db
 
+# ------------------------------ Create Tables and Insert Values --------------------
 def create_tables(db):
   cur = db.cursor()
   
@@ -27,7 +28,6 @@ def create_tables(db):
 def new_Habit(db, name, periodicity,streak=0):
   cur = db.cursor()
   creation_date = date.today()
-  # cur.execute("INSERT or REPLACE INTO habits VALUES (?,?,?)", (name,periodicity,streak))
   cur.execute("INSERT or REPLACE INTO habits VALUES (?,?,?,?)", (name,periodicity,streak, creation_date))
   
   db.commit()
@@ -36,10 +36,29 @@ def habit_checkingOff(db,habit_name,streak=0,checked= False):
   cur = db.cursor()
   checking_date = date.today()
   cur.execute("INSERT or REPLACE INTO habits_data VALUES (?,?,?,?)", (habit_name,checking_date,streak, checked))
-  # cur.execute("INSERT INTO habits_data VALUES (?,?,?)", (habit_name,checking_date,streak, checked))
   db.commit()
 
-#getting data from DB
+def delete_habit(db,habit_name):
+  cur = db.cursor()
+  cur.execute("DELETE FROM habits WHERE habit_name=?", (habit_name,))
+  cur.execute("DELETE FROM habits_data WHERE habit_name=?", (habit_name,))
+  db.commit()
+
+
+def update_streak(db, habit_name, streak):
+  cur = db.cursor()
+  cur.execute("UPDATE habits SET streak = ? WHERE habit_name=?", (streak,habit_name,))
+  db.commit()
+
+
+
+#--------------------------     getting data from DB      -------------------------------
+def get_AllHabits(db):
+  cur = db.cursor()
+  cur.execute("SELECT * FROM habits")
+  # cur.execute("SELECT habit_name FROM habits")
+  return cur.fetchall()
+
 def get_HabitData(db, habit_name):
   cur = db.cursor()
   cur.execute("SELECT * FROM habits_data WHERE habit_name=?", (habit_name,))
@@ -49,3 +68,9 @@ def get_Habits(db, habit_name):
   cur = db.cursor()
   cur.execute("SELECT * FROM habits WHERE habit_name=?", (habit_name,))
   return cur.fetchall()
+
+def get_streak(db, habit_name):
+  cur = db.cursor()
+  cur.execute("SELECT streak FROM habits WHERE habit_name=?", (habit_name,))
+  return cur.fetchall()
+  

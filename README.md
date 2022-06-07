@@ -2,19 +2,19 @@
 
 description
 
-# INSTALLATION
+# Installation
 
 ```shell
 pip install -r requirements.txt
 ```
 
-or
+or (depending on python version)
 
 ```shell
 pip3 install -r requirements.txt
 ```
 
-# USAGE
+# Usage
 
 start
 
@@ -22,7 +22,7 @@ start
 python main.py
 ```
 
-or
+or (depending on python version)
 
 ```shell
 python3 main.py
@@ -30,13 +30,13 @@ python3 main.py
 
 and follow instructions on screen
 
-# TESTING
+# Testing
 
 ```shell
 pytest .
 ```
 
-or
+or (depending on python version)
 
 ```shell
 python3 -m pytest
