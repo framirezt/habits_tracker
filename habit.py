@@ -51,5 +51,3 @@ class Habit:
 
 
 
-
-habit = Habit('running', 'daily')

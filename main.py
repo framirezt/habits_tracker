@@ -9,7 +9,12 @@ def cli():
 
   stop = False
   while not stop:
-    choice = questionary.select("What do you want to do?",choices=["1. Create a new Habit", "2. Check off your Habit", "3. Delete a habit", "4. Get My Analytics", "5. Exit"]).ask()
+    choice = questionary.select("What do you want to do?",
+    choices=["1. Create a new Habit", 
+    "2. Check off your Habit", 
+    "3. Delete a habit", 
+    "4. Get My Analytics", 
+    "5. Exit"]).ask()
 
     if choice == "1. Create a new Habit":
       habit_name = questionary.text("What's the name of the habit you want to create?").ask()
@@ -28,10 +33,26 @@ def cli():
       delete_habit(db, habit_name)
       
     elif choice == "4. Get My Analytics":
-      analytics_choice = questionary.select("Which analytics do you want to see?",choices=["1. All your current habits with their details.", "2. All habits with a same periodicity", "3. The longest streak you have had out of all your habits.", "4. The longest streak for a specific habit."]).ask()
+      analytics_choice = questionary.select("Which analytics do you want to see?",
+      choices=[
+        "1. All your current habits with their details.", 
+        "2. All habits with a same time-period", 
+        "3. The longest streak you have out of all your current habits.", 
+        "4. The longest streak you've had for a specific habit.",
+        "5. Get the log of all the times you've checked-off a specific habit."]).ask()
       if analytics_choice == "1. All your current habits with their details.":
         habits_list(db)
-      
+      elif analytics_choice == "2. All habits with a same time-period":
+        periodicity = questionary.select("How often do you want to do this task?",choices=["Daily", "Weekly", "Monthly"]).ask()
+        habits_periodicity(db, periodicity)
+      elif analytics_choice == "3. The longest streak you have out of all your current habits.":
+        longest_streak(db)
+      elif analytics_choice == "4. The longest streak you've had for a specific habit.":
+        habit_name = questionary.text("What's the name of the habit?").ask()
+        habit_longest_streak(db, habit_name)
+      elif analytics_choice == "5. Get the log of all the times you've checked-off a specific habit.":
+        habit_name = questionary.text("What's the name of the habit?").ask()
+        checkoff_log(db, habit_name)
 
     else:
       print("You have exited successfully.")

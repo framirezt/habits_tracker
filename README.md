@@ -5,13 +5,15 @@ description
 # Installation
 
 ```shell
-pip install -r requirements.txt
+pip install -U pytest
+pip install questionary
 ```
 
 or (depending on python version)
 
 ```shell
-pip3 install -r requirements.txt
+pip3 install -U pytest
+pip3 install questionary
 ```
 
 # Usage

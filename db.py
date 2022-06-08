@@ -35,7 +35,7 @@ def new_Habit(db, name, periodicity,streak=0):
 def habit_checkingOff(db,habit_name,streak=0,checked= False):
   cur = db.cursor()
   checking_date = date.today()
-  cur.execute("INSERT or REPLACE INTO habits_data VALUES (?,?,?,?)", (habit_name,checking_date,streak, checked))
+  cur.execute("INSERT INTO habits_data VALUES (?,?,?,?)", (habit_name,checking_date,streak, checked))
   db.commit()
 
 def delete_habit(db,habit_name):
@@ -56,8 +56,8 @@ def update_streak(db, habit_name, streak):
 def get_AllHabits(db):
   cur = db.cursor()
   cur.execute("SELECT * FROM habits")
-  # cur.execute("SELECT habit_name FROM habits")
   return cur.fetchall()
+
 
 def get_HabitData(db, habit_name):
   cur = db.cursor()
@@ -69,8 +69,28 @@ def get_Habits(db, habit_name):
   cur.execute("SELECT * FROM habits WHERE habit_name=?", (habit_name,))
   return cur.fetchall()
 
+def get_Habits_Periodicity(db, periodicity):
+  cur = db.cursor()
+  cur.execute("SELECT * FROM habits WHERE periodicity=?", (periodicity,))
+  return cur.fetchall()
+
 def get_streak(db, habit_name):
   cur = db.cursor()
   cur.execute("SELECT streak FROM habits WHERE habit_name=?", (habit_name,))
   return cur.fetchall()
-  
+
+def get_longest_streak(db, ):
+  cur = db.cursor()
+  cur.execute("SELECT * FROM habits WHERE streak=(SELECT MAX(streak) FROM habits)")
+  return cur.fetchall()
+
+def get_Habit_checkOffs(db, habit_name):
+  cur = db.cursor()
+  cur.execute("SELECT * FROM habits_data WHERE habit_name=?", (habit_name,))
+  return cur.fetchall()
+
+def get_longest_habit_streak(db, habit_name,):
+  cur = db.cursor()
+  # cur.execute("SELECT * FROM habits_data WHERE current_streak=(SELECT MAX(current_streak) FROM habits_data)", (habit_name,))
+  cur.execute("SELECT * FROM habits_data WHERE (habit_name = ? AND current_streak=(SELECT MAX(current_streak) FROM habits_data))", (habit_name,))
+  return cur.fetchall()
