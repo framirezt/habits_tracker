@@ -1,6 +1,6 @@
 from habit import Habit
 from db import *
-from analytics import checkoff_log, habits_list, longest_streak
+from analytics import checkoff_log, habit_longest_streak, habits_list, longest_streak
 
 class TestHabit:
 
@@ -38,6 +38,10 @@ class TestHabit:
     assert len(periodicity) == 3
     log_length = checkoff_log(self.db, "eating")
     assert log_length == 2
+    longestStreak = longest_streak(self.db)
+    assert longestStreak == 'eating'
+    longest_perHabit = habit_longest_streak(self.db,"eating")
+    assert longest_perHabit == 2
 
 
   def teardown_method(self):

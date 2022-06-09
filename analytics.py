@@ -47,7 +47,7 @@ def longest_streak(db,):
     print(f"Streak: {habit[2]}")
     print(f"Creation  date: {habit[3]}")
     print("\n")
-  return list
+  return habit[0]
 
 # return the longest run streak a given habit has had since created.
 def habit_longest_streak(db,habit_name):
@@ -56,6 +56,7 @@ def habit_longest_streak(db,habit_name):
     print("\n")
     print(f"Your longest streak for '{habit[0]}' is {habit[2]}, which was completed on {habit[1]}.")
     print("\n")
+  return habit[2]
 
     
 
