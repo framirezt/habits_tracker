@@ -1,13 +1,22 @@
 from habit import Habit
 from db import *
-from analytics import habits_list
+from analytics import checkoff_log, habits_list, longest_streak
 
 class TestHabit:
 
   def setup_method(self):
     self.db = get_db("test1.db")
     new_Habit(self.db, "running","daily")
+    new_Habit(self.db, "sleeping","daily")
+    new_Habit(self.db, "grocery shopping","weekly")
+    new_Habit(self.db, "hair cut","monthly")
+    new_Habit(self.db, "eating","daily")
     habit_checkingOff(self.db,"running", 1, True)
+    habit_checkingOff(self.db,"sleeping", 1, True)
+    habit_checkingOff(self.db,"grocery shopping", 1, True)
+    habit_checkingOff(self.db,"hair cut", 1, True)
+    habit_checkingOff(self.db,"eating", 1, True)
+    habit_checkingOff(self.db,"eating", 2, True)
 
   def test_habit(self):
     habit = Habit('running', "daily")
@@ -23,8 +32,12 @@ class TestHabit:
   def test_db_habit(self):
     data = get_Habits(self.db, "running")
     assert len(data)==1
-    count = habits_list(self.db, "running")
-    assert count==1
+    count = habits_list(self.db)
+    assert len(count)==5
+    periodicity = get_Habits_Periodicity(self.db,"daily")
+    assert len(periodicity) == 3
+    log_length = checkoff_log(self.db, "eating")
+    assert log_length == 2
 
 
   def teardown_method(self):

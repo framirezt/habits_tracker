@@ -1,5 +1,5 @@
 import sqlite3
-from datetime import date
+from datetime import date, datetime
 
 def get_db(name="main.db"):
   db = sqlite3.connect(name)
@@ -34,7 +34,8 @@ def new_Habit(db, name, periodicity,streak=0):
 
 def habit_checkingOff(db,habit_name,streak=0,checked= False):
   cur = db.cursor()
-  checking_date = date.today()
+  time = datetime.now()
+  checking_date = time.strftime("%d-%m-%Y %H:%M:%S")
   cur.execute("INSERT INTO habits_data VALUES (?,?,?,?)", (habit_name,checking_date,streak, checked))
   db.commit()
 

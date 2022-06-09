@@ -18,6 +18,8 @@ def habits_list(db, ):
     print(f"Streak: {habit[2]}")
     print(f"Creation  date: {habit[3]}")
     print("\n")
+  return list  
+  
 
 # return a list of all habits with a same given periodicity,
 def habits_periodicity(db, periodicity):
@@ -31,6 +33,7 @@ def habits_periodicity(db, periodicity):
     print(f"Streak: {habit[2]}")
     print(f"Creation  date: {habit[3]}")
     print("\n")
+  
 
 # return the longest run streak of all defined habits,
 def longest_streak(db,):
@@ -44,7 +47,7 @@ def longest_streak(db,):
     print(f"Streak: {habit[2]}")
     print(f"Creation  date: {habit[3]}")
     print("\n")
-
+  return list
 
 # return the longest run streak a given habit has had since created.
 def habit_longest_streak(db,habit_name):
@@ -63,8 +66,9 @@ def checkoff_log(db, habit_name):
   print(f"You have checked-off this habit {len(list)} times since created:")
   print("\n")
   for habit in list:
-    print("-------------------------------------------------------------------")
+    print("----------------------------------------------------------------------------")
     print(f"|| {habit[0]} || Date: {habit[1]}  ||  streak:  {habit[2]}  ||  Checked: {habit[3]}  ||")
     
-  print("-------------------------------------------------------------------")
+  print("----------------------------------------------------------------------------")
   print("\n")
+  return len(list)
