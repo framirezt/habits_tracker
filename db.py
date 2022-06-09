@@ -53,6 +53,7 @@ def update_streak(db, habit_name, streak):
 
 
 
+
 #--------------------------     getting data from DB      -------------------------------
 def get_AllHabits(db):
   cur = db.cursor()
@@ -92,6 +93,5 @@ def get_Habit_checkOffs(db, habit_name):
 
 def get_longest_habit_streak(db, habit_name,):
   cur = db.cursor()
-  # cur.execute("SELECT * FROM habits_data WHERE current_streak=(SELECT MAX(current_streak) FROM habits_data)", (habit_name,))
   cur.execute("SELECT * FROM habits_data WHERE (habit_name = ? AND current_streak=(SELECT MAX(current_streak) FROM habits_data))", (habit_name,))
   return cur.fetchall()

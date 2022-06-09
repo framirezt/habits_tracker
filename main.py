@@ -5,6 +5,9 @@ import questionary
 
 
 def cli():
+  """
+  Generates the Command Line Interface. Starts by asking what the user wants to use and depending on the answer it calls different functions. 
+  """
   db = get_db()
 
   stop = False
@@ -60,6 +63,8 @@ def cli():
 
 
 if __name__ == '__main__':
+  """Calls the cli function when the name of the file typed is 'main'. This starts the CLI and the application.
+  """
   cli()
 
 # python3 main.py

@@ -5,6 +5,8 @@ from analytics import checkoff_log, habit_longest_streak, habits_list, longest_s
 class TestHabit:
 
   def setup_method(self):
+    """Sets up the database and the tables that are going to be used for the tests.
+    """
     self.db = get_db("test1.db")
     new_Habit(self.db, "running","daily")
     new_Habit(self.db, "sleeping","daily")
@@ -19,6 +21,8 @@ class TestHabit:
     habit_checkingOff(self.db,"eating", 2, True)
 
   def test_habit(self):
+    """Tests the habit methods to check everything works.
+    """
     habit = Habit('running', "daily")
 
     habit.store_newHabit(self.db)
@@ -30,6 +34,8 @@ class TestHabit:
     habit.incremenet()
 
   def test_db_habit(self):
+    """Tests the analytics functionality. One test per function of the analytics to check they all work as expected.
+    """
     data = get_Habits(self.db, "running")
     assert len(data)==1
     count = habits_list(self.db)
@@ -45,6 +51,8 @@ class TestHabit:
 
 
   def teardown_method(self):
+    """Removes the "test" database once the testing is done.
+    """
     import os
     os.remove("test1.db")
 
