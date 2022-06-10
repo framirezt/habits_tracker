@@ -73,3 +73,7 @@ def checkoff_log(db, habit_name):
   print("----------------------------------------------------------------------------")
   print("\n")
   return len(list)
+
+
+
+# To do = terminar docstrings 'db' y 'analytics' , terminar ReadME, presentacion p
