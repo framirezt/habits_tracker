@@ -18,7 +18,7 @@ pip3 install -U pytest
 pip3 install questionary
 ```
 
-# Usage
+# Starting The App
 
 To start the application, run this command on the command line. After this, just follow the instructions on your screen. If you have questions about the usage, go to the instructions section below. The commands to start it also depend on your Python version.
 
@@ -48,7 +48,7 @@ or (for python 3.10)
 python3 -m pytest
 ```
 
-# Instructions of use
+# Instructions Of Use
 
 1. Start the application with the starting command
 2. To create a habit, select option #1. Then name the habit and specify the period you want to repeat the habit. The name must be typed the same way every time it is used.
