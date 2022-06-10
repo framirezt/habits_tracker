@@ -67,13 +67,11 @@ def checkoff_log(db, habit_name):
   print(f"You have checked-off this habit {len(list)} times since created:")
   print("\n")
   for habit in list:
-    print("----------------------------------------------------------------------------")
+    print("------------------------------------------------------------------------------")
     print(f"|| {habit[0]} || Date: {habit[1]}  ||  streak:  {habit[2]}  ||  Checked: {habit[3]}  ||")
     
-  print("----------------------------------------------------------------------------")
+  print("------------------------------------------------------------------------------")
   print("\n")
   return len(list)
 
 
-
-# To do = terminar docstrings 'db' y 'analytics' , terminar ReadME, presentacion p
