@@ -42,7 +42,7 @@ To test the application just run your corresponding command:
 pytest .
 ```
 
-or (depending on python version)
+or (for python 3.10)
 
 ```shell
 python3 -m pytest
